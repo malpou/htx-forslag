@@ -1,6 +1,7 @@
+import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, firestore } from "../lib/firebase";
+import { auth, firestore, usersCol } from "../lib/firebase";
 
 export function useUserData() {
 	//TODO Fix this TS error
@@ -12,8 +13,8 @@ export function useUserData() {
 		let unsubscribe;
 
 		if (user) {
-			const ref = firestore.collection("users").doc(user.uid);
-			unsubscribe = ref.onSnapshot((doc) => {
+			const ref = doc(usersCol, user.uid);
+			unsubscribe = onSnapshot(ref, (doc) => {
 				setUsername(doc.data()?.username);
 			});
 		} else setUsername(null);

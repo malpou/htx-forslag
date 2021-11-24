@@ -1,10 +1,21 @@
 // TODO Migrate to firebase version 9
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import "firebase/compat/storage";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { Post } from "../models/Post";
+// Import all your model types
+import { User } from "../models/User";
+import { Username } from "../models/Username";
+import {
+	createCollection,
+	createCollectionGroup,
+} from "../utils/firebaseHelper";
+import { serverTimestamp, increment } from "firebase/firestore";
 
-const firebaseConfig = {
+// Init the firebase app
+export const firebaseApp = initializeApp({
 	apiKey: "AIzaSyA4qhVo9mDIwFLPFGe_9j5X4UXjYV8-GYs",
 	authDomain: "htx-borgerforslag.firebaseapp.com",
 	projectId: "htx-borgerforslag",
@@ -12,13 +23,18 @@ const firebaseConfig = {
 	messagingSenderId: "923302169514",
 	appId: "1:923302169514:web:0de11032c1a5b7bafb79d3",
 	measurementId: "G-4TGW969SBE",
-};
+});
 
-if (!firebase.apps.length) {
-	firebase.initializeApp(firebaseConfig);
-}
+export const auth = getAuth();
+export const googleAuthProvider = new GoogleAuthProvider();
+export const firestore = getFirestore();
+export const storager = getStorage();
+export const timestamp = serverTimestamp();
+export const incrementByOne = increment(1);
 
-export const auth = firebase.auth();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
+// export all your collections
+export const usersCol = createCollection<User>("users");
+export const usernamesCol = createCollection<Username>("usernames");
+export const userPostsCol = (userId: string) =>
+	createCollection<Post>(`users/${userId}/posts`);
+export const postsCol = createCollectionGroup<Post>("posts");

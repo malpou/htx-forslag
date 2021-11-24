@@ -1,7 +1,8 @@
+import { doc, getDoc, writeBatch } from "firebase/firestore";
+import debounce from "lodash.debounce";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context";
-import { firestore } from "../lib/firebase";
-import debounce from "lodash.debounce";
+import { firestore, usernamesCol, usersCol } from "../lib/firebase";
 import UsernameMessage from "./UsernameMessage";
 
 /** Username form */
@@ -16,16 +17,16 @@ export default function UsernameForm({}) {
 		e.preventDefault();
 
 		// Create refs for both documents
-		const userDoc = firestore.doc(`users/${user.uid}`);
-		const usernameDoc = firestore.doc(`usernames/${formValue}`);
+		const userRef = doc(usersCol, user.uid);
+		const usernameRef = doc(usernamesCol, formValue);
 
-		const batch = firestore.batch();
-		batch.set(userDoc, {
+		const batch = writeBatch(firestore);
+		batch.set(userRef, {
 			username: formValue,
 			photoUrl: user.photoURL,
 			displayName: user.displayName,
 		});
-		batch.set(usernameDoc, { userId: user.uid });
+		batch.set(usernameRef, { userId: user.uid });
 
 		await batch.commit();
 	};
@@ -56,8 +57,8 @@ export default function UsernameForm({}) {
 	const checkUsername = useCallback(
 		debounce(async (username: string) => {
 			if (username.length >= 3) {
-				const ref = firestore.doc(`usernames/${username}`);
-				const { exists } = await ref.get();
+				const ref = doc(usernamesCol, username);
+				const exists = await (await getDoc(ref)).exists();
 				setIsValid(!exists);
 				setLoading(false);
 			}

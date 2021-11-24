@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
+import SignOutButton from "./SignOutButton";
 
 type NavbarProps = {};
 
@@ -12,7 +13,7 @@ export default function Navbar({}: NavbarProps) {
 			<ul>
 				<li>
 					<Link href="/">
-						<button>FEED</button>
+						<button className="btn-logo">HTX-Forslag</button>
 					</Link>
 				</li>
 
@@ -25,6 +26,9 @@ export default function Navbar({}: NavbarProps) {
 									Write Posts
 								</button>
 							</Link>
+						</li>
+						<li>
+							<SignOutButton />
 						</li>
 						<li>
 							<Link href={`/${username}`}>
