@@ -13,7 +13,7 @@ export default function Navbar({}: NavbarProps) {
 			<ul>
 				<li>
 					<Link href="/">
-						<button className="btn-logo">HTX-Forslag</button>
+						<button className="btn-logo">HTX Forslag</button>
 					</Link>
 				</li>
 
