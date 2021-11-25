@@ -8,6 +8,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@grpc/grpc-js": "^1.4.4",
 		"firebase": "^9.5.0",
 		"lodash.debounce": "^4.0.8",
 		"lodash.kebabcase": "^4.1.1",
