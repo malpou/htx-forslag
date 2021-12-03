@@ -41,7 +41,7 @@ export default function PostManager({}: PostManagerProps) {
 						<button onClick={() => setPreview(!preview)}>
 							{preview ? "Edit" : "Preview"}{" "}
 						</button>
-						<Link href={`/${post.username}/${post.slug}`}>
+						<Link href={`/${post.email}/${post.slug}`}>
 							<button className="btn-blue">Live view</button>
 						</Link>
 					</aside>

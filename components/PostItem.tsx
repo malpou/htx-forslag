@@ -12,13 +12,13 @@ export default function PostItem({ post, admin }: PostItemProps) {
 
 	return (
 		<div className="card">
-			<Link href={`/${post.username}`}>
+			<Link href={`/${post.email}`}>
 				<a>
-					<strong>By @{post.username}</strong>
+					<strong>By @{post.email}</strong>
 				</a>
 			</Link>
 
-			<Link href={`/${post.username}/${post.slug}`}>
+			<Link href={`/${post.email}/${post.slug}`}>
 				<h2>
 					<a>{post.title}</a>
 				</h2>

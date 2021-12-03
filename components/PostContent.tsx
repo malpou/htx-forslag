@@ -14,8 +14,8 @@ export default function PostContent({ post }: PostContentProps) {
 			<h1>{post.title}</h1>
 			<span className="text-sm">
 				Written by{" "}
-				<Link href={`/${post.username}`}>
-					<a className="text-info">@{post.username}</a>
+				<Link href={`/${post.email}`}>
+					<a className="text-info">{post.email}</a>
 				</Link>{" "}
 				on {createdAt.toDateString()}
 			</span>
