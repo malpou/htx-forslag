@@ -13,6 +13,8 @@ import PostFeed from "../components/PostFeed";
 import { useState } from "react";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import { getAllPosts, getMorePosts } from "../services/postService";
+
 
 const LIMIT = 2;
 
@@ -22,20 +24,8 @@ type HomePageProps = {
 };
 
 export async function getServerSideProps() {
-	const posts: Post[] = [];
+	const posts = await getAllPosts(LIMIT)
 	let postEnd = false;
-
-	const q = query(
-		postsCol,
-		where("published", "==", true),
-		orderBy("createdAt", "desc"),
-		limit(LIMIT)
-	);
-
-	(await getDocs(q)).forEach((doc) => {
-		const data = doc.data();
-		posts.push(data);
-	});
 
 	if (posts.length < LIMIT) {
 		postEnd = true;
@@ -51,30 +41,14 @@ export default function HomePage(props: HomePageProps) {
 	const [loading, setLoading] = useState(false);
 	const [postsEnd, setPostsEnd] = useState(props.postEnd);
 
-	const getMorePosts = async () => {
-		const newPosts: Post[] = [];
-
+	const loadMore = async () => {
 		setLoading(true);
 
 		const last = posts[posts.length - 1];
-		const cursor =
-			typeof last.createdAt === "number"
-				? Timestamp.fromMillis(last.createdAt)
-				: last.createdAt;
+		const cursor = last.createdAt;
 
-		const q = query(
-			postsCol,
-			where("published", "==", true),
-			orderBy("createdAt", "desc"),
-			startAfter(cursor),
-			limit(LIMIT)
-		);
-
-		(await getDocs(q)).forEach((doc) => {
-			const data = doc.data();
-			newPosts.push(data);
-		});
-
+		const newPosts = await getMorePosts(LIMIT, cursor);
+		
 		toast.success("Successfully loaded more posts");
 		setPosts(posts.concat(newPosts));
 		setLoading(false);
@@ -89,7 +63,7 @@ export default function HomePage(props: HomePageProps) {
 			<PostFeed posts={posts} />
 
 			{!loading && !postsEnd && (
-				<button onClick={getMorePosts}>Load more</button>
+				<button onClick={loadMore}>Load more</button>
 			)}
 
 			<Loader show={loading} />

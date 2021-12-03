@@ -6,7 +6,7 @@ import SignOutButton from "./SignOutButton";
 type NavbarProps = {};
 
 export default function Navbar({}: NavbarProps) {
-	const { user, username } = useContext(UserContext);
+	const { user, email } = useContext(UserContext);
 
 	return (
 		<nav className="navbar">
@@ -18,7 +18,7 @@ export default function Navbar({}: NavbarProps) {
 				</li>
 
 				{/* user is signed-in and has username */}
-				{username && (
+				{email && (
 					<>
 						<li className="push-left">
 							<Link href="/admin">
@@ -31,18 +31,18 @@ export default function Navbar({}: NavbarProps) {
 							<SignOutButton />
 						</li>
 						<li>
-							<Link href={`/${username}`}>
-								<img src={user?.photoURL} />
+							<Link href={`/${email}`}>
+								{email}
 							</Link>
 						</li>
 					</>
 				)}
 
 				{/* user is not signed OR has not created username */}
-				{!username && (
+				{!email && (
 					<li>
 						<Link href="/enter">
-							<button id="btn-login" className="btn-blue">Login</button>
+							<button id="btn-login" className="btn-blue">Login / Sign up</button>
 						</Link>
 					</li>
 				)}

@@ -4,7 +4,7 @@ export type Post = {
 	title: string;
 	slug: string;
 	uid: string;
-	username: string;
+	email: string;
 	published: boolean;
 	content: string;
 	createdAt: string;

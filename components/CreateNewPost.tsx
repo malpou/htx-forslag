@@ -11,7 +11,7 @@ type CreateNewPostProps = {};
 
 export default function CreateNewPost({}: CreateNewPostProps) {
 	const router = useRouter();
-	const { username } = useContext(UserContext);
+	const { email } = useContext(UserContext);
 	const [title, setTitle] = useState("");
 
 	// Ensure slug is url safe
@@ -29,7 +29,7 @@ export default function CreateNewPost({}: CreateNewPostProps) {
 			title,
 			slug,
 			uid,
-			username,
+			email,
 			published: false,
 			content: "No content on the post",
 			createdAt: new Date().toISOString(),

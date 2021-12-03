@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "cypress/integration/sample.spec.js"  ],
+, "cypress/integration/sample.spec.js", "cypress/plugins/index.js", "cypress/support/commands.js", "cypress/support/index.js"  ],
   "exclude": [
     "node_modules"
   ]

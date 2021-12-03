@@ -6,7 +6,7 @@ import { auth, firestore, usersCol } from "../lib/firebase";
 export function useUserData() {
 	//TODO Fix this TS error
 	const [user] = useAuthState(auth);
-	const [username, setUsername] = useState(null);
+	const [email, setEmail] = useState(null);
 
 	useEffect(() => {
 		// turn off realtime subscription
@@ -15,12 +15,12 @@ export function useUserData() {
 		if (user) {
 			const ref = doc(usersCol, user.uid);
 			unsubscribe = onSnapshot(ref, (doc) => {
-				setUsername(doc.data()?.username);
+				setEmail(doc.data()?.email);
 			});
-		} else setUsername(null);
+		} else setEmail(null);
 
 		return unsubscribe;
 	}, [user]);
 
-	return { user, username };
+	return { user, email };
 }

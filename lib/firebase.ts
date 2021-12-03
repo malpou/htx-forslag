@@ -7,7 +7,7 @@ import { getStorage } from "firebase/storage";
 import { Post } from "../models/Post";
 // Import all your model types
 import { User } from "../models/User";
-import { Username } from "../models/Username";
+import { Email } from "../models/Email";
 import {
 	createCollection,
 	createCollectionGroup,
@@ -34,7 +34,7 @@ export const incrementByOne = increment(1);
 
 // export all your collections
 export const usersCol = createCollection<User>("users");
-export const usernamesCol = createCollection<Username>("usernames");
+export const emailCol = createCollection<Email>("usernames");
 export const userPostsCol = (userId: string) =>
 	createCollection<Post>(`users/${userId}/posts`);
 export const postsCol = createCollectionGroup<Post>("posts");

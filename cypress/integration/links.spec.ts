@@ -4,10 +4,10 @@ describe('Frontpage', () => {
     it('login btn should navigate to the login page', () => {
         // Start from the index page
         cy.visit('/')
-    
+
         // Find a link with an href attribute containing "about" and click it
         cy.get("#btn-login").click()
-    
+
         // The new url should include "/enter"
         cy.url().should('include', '/enter')
     })

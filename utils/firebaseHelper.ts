@@ -8,11 +8,11 @@ import {
 	DocumentData,
 	getDoc,
 } from "firebase/firestore";
-import { firestore, usernamesCol, usersCol } from "../lib/firebase";
+import { firestore, emailCol, usersCol } from "../lib/firebase";
 
 /** Gets a users/{uid} document with username */
 export async function getUserWithUsername(username: string) {
-	const usernameDocRef = doc(usernamesCol, username);
+	const usernameDocRef = doc(emailCol, username);
 	const usernameDoc = await getDoc(usernameDocRef);
 	if (!usernameDoc.data()) {
 		return null;
