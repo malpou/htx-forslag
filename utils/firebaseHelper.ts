@@ -11,8 +11,8 @@ import {
 import { firestore, emailCol, usersCol } from "../lib/firebase";
 
 /** Gets a users/{uid} document with username */
-export async function getUserWithUsername(username: string) {
-	const usernameDocRef = doc(emailCol, username);
+export async function getUserWithEmail(email: string) {
+	const usernameDocRef = doc(emailCol, email);
 	const usernameDoc = await getDoc(usernameDocRef);
 	if (!usernameDoc.data()) {
 		return null;

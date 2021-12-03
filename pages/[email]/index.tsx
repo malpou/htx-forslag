@@ -4,7 +4,7 @@ import UserProfile from "../../components/UserProfile";
 import { userPostsCol } from "../../lib/firebase";
 import { Post } from "../../models/Post";
 import { User } from "../../models/User";
-import { getUserWithUsername } from "../../utils/firebaseHelper";
+import { getUserWithEmail } from "../../utils/firebaseHelper";
 
 type UserProfilePageProps = {
 	posts: Post[];
@@ -12,9 +12,9 @@ type UserProfilePageProps = {
 };
 
 export async function getServerSideProps({ query: params }) {
-	const { username } = params;
+	const { email } = params;
 
-	const userDoc = await getUserWithUsername(username);
+	const userDoc = await getUserWithEmail(email);
 
 	if (!userDoc) {
 		return {

@@ -17,7 +17,7 @@ export default function Navbar({}: NavbarProps) {
 					</Link>
 				</li>
 
-				{/* user is signed-in and has username */}
+				{/* user is signed-in and has email */}
 				{email && (
 					<>
 						<li className="push-left">
@@ -38,7 +38,7 @@ export default function Navbar({}: NavbarProps) {
 					</>
 				)}
 
-				{/* user is not signed OR has not created username */}
+				{/* user is not signed OR has not created email */}
 				{!email && (
 					<li>
 						<Link href="/enter">

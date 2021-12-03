@@ -1,7 +1,7 @@
 import { doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { postsCol, userPostsCol } from "../../lib/firebase";
 import { Post } from "../../models/Post";
-import { getUserWithUsername } from "../../utils/firebaseHelper";
+import { getUserWithEmail } from "../../utils/firebaseHelper";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import PostContent from "../../components/PostContent";
 import Metatags from "../../components/Metatags";
@@ -13,8 +13,8 @@ type UserPostPageProps = {
 };
 
 export async function getStaticProps({ params }) {
-	const { username, slug } = params;
-	const userDoc = await getUserWithUsername(username);
+	const { email, slug } = params;
+	const userDoc = await getUserWithEmail(email);
 
 	let post: Post;
 	let path: string;

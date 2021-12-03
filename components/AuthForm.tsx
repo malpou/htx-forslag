@@ -26,9 +26,9 @@ export default function AuthForm() {
 
     // TODO Implement check if email is already in use
     const checkMail = useCallback(
-        debounce(async (username: string) => {
-            if (username.length >= 3) {
-                const ref = doc(emailCol, username);
+        debounce(async (email: string) => {
+            if (email.length >= 3) {
+                const ref = doc(emailCol, email);
                 const exists = (await getDoc(ref)).exists();
 
             }
