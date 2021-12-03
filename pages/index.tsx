@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import { getAllPosts, getMorePosts } from "../services/postService";
 
 
-const LIMIT = 2;
+const LIMIT = 6;
 
 type HomePageProps = {
 	posts: Post[];

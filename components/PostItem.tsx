@@ -7,17 +7,8 @@ type PostItemProps = {
 };
 
 export default function PostItem({ post, admin }: PostItemProps) {
-	const wordCount = post.content.trim().split(/\s+/).length;
-	const minutesToRead = (wordCount / 100 + 1).toFixed(0);
-
 	return (
-		<div className="card">
-			<Link href={`/${post.email}`}>
-				<a>
-					<strong>By @{post.email}</strong>
-				</a>
-			</Link>
-
+		<div className="card post-card">
 			<Link href={`/${post.email}/${post.slug}`}>
 				<h2>
 					<a>{post.title}</a>
@@ -25,11 +16,8 @@ export default function PostItem({ post, admin }: PostItemProps) {
 			</Link>
 
 			<footer>
-				<span>
-					{wordCount} words. {minutesToRead} min read
-				</span>
 				<span className="push-left">
-					💗 {post.heartCount || 0} Hearts
+					{post.heartCount || 0} Votes
 				</span>
 			</footer>
 

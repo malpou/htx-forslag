@@ -8,12 +8,12 @@ type PostFeedProps = {
 
 export default function PostFeed({ posts, admin }: PostFeedProps) {
 	return (
-		<>
+		<div className="post-container">
 			{posts
 				? posts.map((post) => (
 						<PostItem post={post} key={post.slug} admin={admin} />
 				  ))
 				: null}
-		</>
+		</div>
 	);
 }
