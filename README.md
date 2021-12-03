@@ -26,6 +26,6 @@ Once the dependencies are installed, you can run  `npm run dev` to a local devel
 
 ## License
 
->You can check out the full license [here](https://googgle.com)
+>You can check out the full license [here](https://github.com/malpou/htx-forslag/blob/main/LICENSE)
 
 This project is licensed under the terms of the **MIT** license.
