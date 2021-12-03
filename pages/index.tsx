@@ -16,7 +16,8 @@ import toast from "react-hot-toast";
 import { getAllPosts, getMorePosts } from "../services/postService";
 
 
-const LIMIT = 6;
+const FIRST_LIMIT = 6;
+const LOAD_MORE_LIMIT = 3;
 
 type HomePageProps = {
 	posts: Post[];
@@ -24,10 +25,10 @@ type HomePageProps = {
 };
 
 export async function getServerSideProps() {
-	const posts = await getAllPosts(LIMIT)
+	const posts = await getAllPosts(FIRST_LIMIT)
 	let postEnd = false;
 
-	if (posts.length < LIMIT) {
+	if (posts.length < FIRST_LIMIT) {
 		postEnd = true;
 	}
 
@@ -47,13 +48,13 @@ export default function HomePage(props: HomePageProps) {
 		const last = posts[posts.length - 1];
 		const cursor = last.createdAt;
 
-		const newPosts = await getMorePosts(LIMIT, cursor);
+		const newPosts = await getMorePosts(LOAD_MORE_LIMIT, cursor);
 		
 		toast.success("Successfully loaded more posts");
 		setPosts(posts.concat(newPosts));
 		setLoading(false);
 
-		if (newPosts.length < LIMIT) {
+		if (newPosts.length < LOAD_MORE_LIMIT) {
 			setPostsEnd(true);
 		}
 	};
