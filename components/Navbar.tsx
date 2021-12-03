@@ -42,7 +42,7 @@ export default function Navbar({}: NavbarProps) {
 				{!username && (
 					<li>
 						<Link href="/enter">
-							<button className="btn-blue">Log in</button>
+							<button id="btn-login" className="btn-blue">Login</button>
 						</Link>
 					</li>
 				)}
